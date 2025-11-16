@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeaScore - 60-Second AI Idea Evaluation</title>
+    
+    <!-- Link to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+    <!-- Link to our external stylesheet -->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+    <header class="header"><h1>IdeaScore</h1></header>
+
+    <main id="app-container" class="container">
+
+        <section id="landing-view" class="view">
+            <h2>Evaluate Your Idea in 60 Seconds.</h2>
+            <p>Answer a few quick questions to get an instant, AI-powered analysis of your business or project concept.</p>
+            <button id="start-btn" class="btn btn-primary" style="width: auto; padding: 1.25rem 3rem;">Start Evaluation</button>
+        </section>
+
+        <section id="mcq-view" class="view hidden">
+            <div class="glass-card">
+                <div id="progress-bar-container"><div id="progress-bar"></div></div>
+                <div id="mcq-content">
+                    <!-- MCQ will be rendered here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="detail-view" class="view hidden">
+            <div class="glass-card">
+                <h2>Great! Now, bring it all together.</h2>
+                <p>Describe your core idea in detail. What is it, who is it for, and what makes it unique?</p>
+                <textarea id="idea-text-area" placeholder="e.g., A subscription box service for rare indoor plants, targeted at millennial apartment dwellers..."></textarea>
+                <div class="navigation-buttons">
+                    <button id="detail-back-btn" class="btn btn-secondary">Back</button>
+                    <button id="submit-btn" class="btn btn-primary">Analyze My Idea</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="loading-view" class="view hidden">
+            <div class="spinner"></div>
+            <h2>Analyzing...</h2>
+        </section>
+
+        <section id="results-view" class="view hidden">
+             <h2>Evaluation Report</h2>
+             
+             <!-- Key Metrics Summary Bar -->
+             <div class="metrics-summary">
+                <div class="metric-item">
+                    <span class="metric-label">Market Potential</span>
+                    <span class="metric-value" id="market-potential">High</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Competition</span>
+                    <span class="metric-value" id="competition-level">Medium</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Feasibility</span>
+                    <span class="metric-value" id="feasibility-level">High</span>
+                </div>
+             </div>
+
+             <!-- Main Score Cards with Progress Rings -->
+             <div class="results-grid">
+                <div class="card card-rating">
+                    <h3>Overall Score</h3>
+                    <div class="score-container">
+                        <canvas id="overall-chart" width="150" height="150"></canvas>
+                        <p id="overall-rating" class="score">0.0</p>
+                    </div>
+                </div>
+                <div class="card card-probability">
+                    <h3>Success Probability</h3>
+                    <div class="score-container">
+                        <canvas id="probability-chart" width="150" height="150"></canvas>
+                        <p id="success-probability" class="score">0%</p>
+                    </div>
+                </div>
+                <div class="card card-founder-fit">
+                    <h3>Founder-Fit Score</h3>
+                    <div class="score-container">
+                        <canvas id="founder-chart" width="150" height="150"></canvas>
+                        <p id="founder-fit-score" class="score">0%</p>
+                    </div>
+                </div>
+
+                <!-- Radar Chart for Score Breakdown -->
+                <div class="card full-width radar-card">
+                    <h3>Score Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="radar-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Pros and Cons with Visual Weights -->
+                <div class="card pros-cons-card">
+                    <h3>Strengths</h3>
+                    <ul id="pros-list" class="pros-list"></ul>
+                </div>
+                <div class="card pros-cons-card">
+                    <h3>Challenges</h3>
+                    <ul id="cons-list" class="cons-list"></ul>
+                </div>
+
+                <!-- Comparison Bar Chart -->
+                <div class="card full-width">
+                    <h3>Aspect Comparison</h3>
+                    <div class="chart-container">
+                        <canvas id="comparison-chart"></canvas>
+                    </div>
+                </div>
+
+
+             </div>
+             
+             <button id="restart-btn" class="btn btn-secondary" style="margin: 2rem auto 0; display: block;">Start New Evaluation</button>
+        </section>
+        
+        <section id="error-view" class="view hidden">
+            <h2>An Error Occurred</h2>
+            <p id="error-message"></p>
+            <button id="error-restart-btn" class="btn btn-primary">Try Again</button>
+        </section>
+
+    </main>
+
+    <!-- Link to our external JavaScript file, placed at the end of the body -->
+    <script src="app.js" defer></script>
+</body>
+</html>

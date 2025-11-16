@@ -1,0 +1,11 @@
+# File: .gitignore
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# IDE specific
+.idea/
+.vscode/
